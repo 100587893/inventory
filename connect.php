@@ -1,8 +1,8 @@
 <?php
-	$servername="localhost";
-	$username="root";
-	$password="Madinat$902";
-	$dbname="invms";
+	$servername="fssys.cxe6ysgxahgj.us-east-2.rds.amazonaws.com";
+	$username="admin";
+	$password="MqnYpgXgnIBW2HKSFbk4";
+	$dbname="fssys";
 
 	//Create connection
 	$conn = new mysqli($servername, $username, $password, $dbname);
