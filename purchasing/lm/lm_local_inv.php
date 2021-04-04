@@ -2,7 +2,7 @@
   session_start();
   if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && $_SESSSION['role']='local') {
 	include("lm_topbar.php");
-	include("..\..\connect.php");
+	include("../../connect.php");
   } else {
   	header("Location: C:/wamp64/www/index.php");
   	exit();
