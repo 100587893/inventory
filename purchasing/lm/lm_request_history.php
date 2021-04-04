@@ -10,7 +10,7 @@
   }
 
   $campus = $_SESSION['access'];
-  $local_inv = $campus ."_inv";
+  $local_inv = strtolower($campus ."_inv");
 
   if (isset($_GET['rid'])) {
     $rid = $_GET['rid'];
