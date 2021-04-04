@@ -59,7 +59,7 @@
 			}
 			exit();
 		}
-		elseif($access == 'Barrie'){
+		elseif($access == 'barrie'){
 			if ($role == 'local') {
 				header('Location: purchasing/lm/lm_local_inv.php');
 			}

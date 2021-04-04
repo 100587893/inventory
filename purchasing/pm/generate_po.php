@@ -90,9 +90,9 @@
 				<div class='container1'>
 					<h5><b>Bill To:</b></h5>
 					<p>Oxford College</p>
-					<p>670 Progress Avenue,</p>
+					<p>300 Borough Drive,</p>
 					<p>Scarborough, Ontario, Canada</p>
-					<p>M1H 2W6</p>
+					<p>M1P 4P5</p>
 				</div>
 
 				<div class='container2'>
