@@ -149,7 +149,7 @@
      	 	<th class="table1">Action</th>
       	</tr>
 		<?php
-    $inv = $campus ."_inv";
+    $inv = strtolower($campus ."_inv");
 		//Static Query
 		$sql = "SELECT * FROM $inv INNER JOIN product ON $inv.product_id=product.product_id WHERE $inv.quantity>0;";
 		$result = $conn->query($sql);
