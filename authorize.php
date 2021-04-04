@@ -59,24 +59,6 @@
 			}
 			exit();
 		}
-		elseif($access == 'toronto'){
-			if ($role == 'local') {
-				header('Location: purchasing/lm/lm_local_inv.php');
-			}
-			elseif ($role == 'campus') {
-				header('Location: purchasing/cm/cm_local_inv.php');
-			}
-			exit();
-		}
-		elseif($access == 'mississauga'){
-			if ($role == 'local') {
-				header('Location: purchasing/lm/lm_local_inv.php');
-			}
-			elseif ($role == 'campus') {
-				header('Location: purchasing/cm/cm_local_inv.php');
-			}
-			exit();
-		}
 		elseif($access == 'Barrie'){
 			if ($role == 'local') {
 				header('Location: purchasing/lm/lm_local_inv.php');
@@ -87,15 +69,6 @@
 			exit();
 		}
 		elseif($access == 'burlington'){
-			if ($role == 'local') {
-				header('Location: purchasing/lm/lm_local_inv.php');
-			}
-			elseif ($role == 'campus') {
-				header('Location: purchasing/cm/cm_local_inv.php');
-			}
-			exit();
-		}
-		elseif($access == 'peterborough'){
 			if ($role == 'local') {
 				header('Location: purchasing/lm/lm_local_inv.php');
 			}
