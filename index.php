@@ -53,24 +53,20 @@
 		</style>
 	</head>
 	<body>
-        <img src="img/Logo.png" style="float:middle; margin-top:5%;" width="500px" height="70px">
 		<br>
 		<br>
         <div class="container">
 			<br>
         	<h2>Inventory and Purchase Ordering</h2>
         	<br>
-				<form action="authorize.php" method="POST">
-                	
-                    <input type="text" name="user" placeholder="Username" >
-                    <input type="password" name="pass" placeholder="Password"/>
-                    <br>
-                    <br>
-                    <br>
-					<input type="submit" value="LOGIN" />
-                    
-				</form>
-
-		</div>
+		<form action="authorize.php" method="POST">
+                	<input type="text" name="user" placeholder="Username" >
+			<input type="password" name="pass" placeholder="Password"/>
+			<br>
+			<br>
+			<br>
+			<input type="submit" value="LOGIN" />
+                </form>
+	</div>
 	</body>
 </html>
