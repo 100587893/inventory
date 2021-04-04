@@ -2,7 +2,7 @@
 	$servername="fssys.cxe6ysgxahgj.us-east-2.rds.amazonaws.com";
 	$username="admin";
 	$password="MqnYpgXgnIBW2HKSFbk4";
-	$dbname="fssys";
+	$dbname="invms";
 
 	//Create connection
 	$conn = new mysqli($servername, $username, $password, $dbname);
