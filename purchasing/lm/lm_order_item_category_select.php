@@ -42,11 +42,20 @@
         while ($row = mysqli_fetch_assoc($result)) {
           $item = $row["category"];
 
-					$opt .= "	 <a href='lm_order_item_item_select.php?category=$item'>
+          if (strpos($item, "kit") !== false) {
+            $opt .= "	 <a href='lm_kit_order.php?kit=$item'>
 											 <div class='row' data-href='#' style='width: 100%; padding: 10px;'>
 											 		<h4>$item</h4>
 											 </div>
 										 </a>";
+          }
+          else {
+            $opt .= "	 <a href='lm_order_item_item_select.php?category=$item'>
+											 <div class='row' data-href='#' style='width: 100%; padding: 10px;'>
+											 		<h4>$item</h4>
+											 </div>
+										 </a>";
+          }
         }
         echo $opt;
       ?>

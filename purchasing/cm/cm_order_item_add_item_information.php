@@ -42,12 +42,12 @@
     <br>
     <div class="container">
       <h3 style="text-align: center;"><?php echo $row['name']; ?></h3><br>
-      <img src="../../images/<?php echo $row['id']; ?>.jpg" style="display: block; margin-left: auto; margin-right: auto; width: 40%;">
+      <image src="../../images/<?php echo $row['id']; ?>.jpg" style="display: block; margin-left: auto; margin-right: auto; width: 40%;">
       <br>
 
       <form action="cm_order_item_add_item_function.php?id=<?php echo $id ?>" method="post">
         <label for="quantity"><b>Quantity:</b></label>
-        <input type="text" id="quantity" name="quantity" style="width: 100%;">
+        <input type="text" id="quantity" name="quantity" style="width: 90%;"><span style="margin-left:10px;"><?php echo $row['unit']; ?></span>
         <button type="submit" name="button" style="float: right; margin-top: 10px;">Add To Order</button>
       </form>
     </div>

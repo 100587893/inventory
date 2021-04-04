@@ -39,7 +39,7 @@
         padding-bottom: 10px;
         padding-right: 10px;
         padding-left: 10px;
-        border-bottom: 2px solid black;
+        border-bottom: 1px solid black;
       }
   		.outside{
   			font-size: 40px;
@@ -62,7 +62,7 @@
         <table style="width: 100%;">
           <tr>
             <td><label for="quantity">Quantity:</label></td>
-            <td><h5><?php echo $row2['quantity']; ?></h5></td>
+            <td><h5><?php echo $row2['quantity']; ?> <?php echo $row['unit']; ?></h5></td>
           </tr>
           <tr>
             <td><label for="delivered_by">Sent With:</label></td>

@@ -15,28 +15,57 @@
   $result = mysqli_query($conn, $query);
   $item = mysqli_fetch_assoc($result);
   $rid2 = $item['r_id'];
+  $pid2 = $item['product_id'];
 
   $query = "SELECT * FROM cart WHERE username='$username';";
   $result = mysqli_query($conn, $query);
 
-  while ($row = mysqli_fetch_assoc($result)) {
-    $query = "SELECT campus FROM user WHERE username='$username';";
+  if (isset($_GET['kit'])) {
+    $kit = $_GET['kit'];
+
+
+    $query = "SELECT * FROM product WHERE name='$kit';";
     $result2 = mysqli_query($conn, $query);
     $row2 = mysqli_fetch_assoc($result2);
 
-    $rid = $row['r_id'];
-    $campus2 = $row2['campus'];
-    $pid = $row['product_id'];
-    $quantity = $row['quantity'];
+    $rid = $item['r_id'];
+    $pid = $row2['product_id'];
 
-    $query = "SELECT supplier, price FROM product WHERE product_id='$pid';";
-    $result3 = mysqli_query($conn, $query);
-    $row3 = mysqli_fetch_assoc($result3);
-    $supplier = $row3['supplier'];
-    $price = $row3['price'];
+    $sql = "SELECT quantity FROM kit WHERE product_id='$pid2' AND kit='$kit';";
+    $result3 = $conn->query($sql);
+    $row3 = $result3->fetch_assoc();
+    $kit_quantity = $row3['quantity'];
 
-    $query = "INSERT INTO requests (r_id, username, campus, product_id, supplier, quantity, unit_price) VALUES ($rid, '$username', '$campus2', '$pid', '$supplier', $quantity, $price);";
+    $quantity = $item['quantity'];
+
+    $qnty = $quantity/$kit_quantity;
+
+    $supplier = $row2['supplier'];
+    $price = $row2['price'];
+
+    $query = "INSERT INTO requests (r_id, username, campus, product_id, supplier, quantity, unit_price) VALUES ($rid, '$username', '$campus', '$pid', '$supplier', $qnty, $price);";
     mysqli_query($conn, $query);
+  }
+  else {
+    while ($row = mysqli_fetch_assoc($result)) {
+      $query = "SELECT campus FROM user WHERE username='$username';";
+      $result2 = mysqli_query($conn, $query);
+      $row2 = mysqli_fetch_assoc($result2);
+  
+      $rid = $row['r_id'];
+      $campus2 = $row2['campus'];
+      $pid = $row['product_id'];
+      $quantity = $row['quantity'];
+  
+      $query = "SELECT supplier, price FROM product WHERE product_id='$pid';";
+      $result3 = mysqli_query($conn, $query);
+      $row3 = mysqli_fetch_assoc($result3);
+      $supplier = $row3['supplier'];
+      $price = $row3['price'];
+  
+      $query = "INSERT INTO requests (r_id, username, campus, product_id, supplier, quantity, unit_price) VALUES ($rid, '$username', '$campus', '$pid', '$supplier', $quantity, $price);";
+      mysqli_query($conn, $query);
+    }
   }
 
   $query = "DELETE FROM cart WHERE r_id=$rid2;";

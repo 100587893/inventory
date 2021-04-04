@@ -17,8 +17,9 @@
   $formSupplier = $_POST["supplier"];
   $formDescription = $_POST["description"];
   $formStock = $_POST["minStock"];
+  $formUnit = $_POST["unit"];
 
-  $query = "INSERT INTO item_request (requester, campus, category, name, product_id, manufacturer, supplier, description, min_stock) VALUES ('$username', '$campus', '$formCategory', '$formName', '$formSerial', '$formManufacturer', '$formSupplier', '$formDescription', $formStock);";
+  $query = "INSERT INTO item_request (requester, campus, category, name, product_id, manufacturer, supplier, description, min_stock, unit) VALUES ('$username', '$campus', '$formCategory', '$formName', '$formSerial', '$formManufacturer', '$formSupplier', '$formDescription', $formStock, '$formUnit');";
   mysqli_query($conn, $query);
 
   $query = "SELECT email, fullname FROM user WHERE role='purchasing';";

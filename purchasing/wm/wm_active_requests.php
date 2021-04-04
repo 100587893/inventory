@@ -134,7 +134,7 @@
                           <h5>$pid</h5>
                         </div>";
 
-            $query2 = "SELECT name FROM product WHERE product_id='$pid';";
+            $query2 = "SELECT name, unit FROM product WHERE product_id='$pid';";
             $result2 = mysqli_query($conn, $query2);
             $row2 = mysqli_fetch_assoc($result2);
             $name = $row2['name'];
@@ -144,7 +144,7 @@
                         </div>
 
                         <div class='content'>
-                          <h5>" .$row['quantity']. "</h5>
+                          <h5>" .$row['quantity']. " " .$row2['unit']. "</h5>
                         </div>
 
                         <div class='content'>

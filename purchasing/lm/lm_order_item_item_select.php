@@ -12,7 +12,7 @@
 
   $category = $_GET['category'];
 
-  $query = "SELECT product_id, name FROM product WHERE category='$category';";
+  $query = "SELECT id, product_id, name, description FROM product WHERE category='$category';";
   $result = mysqli_query($conn, $query);
 ?>
 
@@ -58,26 +58,40 @@
   <body>
     <br>
     <div class="container">
-      <h2>Please Select An Item</h2>
-      <br>
+      <div class="container">
+        <h2 style="float: left;">Please Select An Item</h2>
+
+        <?php
+          if (strpos($category, " Kit")) {
+            echo "<a href='lm_kit_order.php?kit=$category'><button class='btn btn-primary' style='float: right;'>Order Kit</button></a>";
+          }
+        ?>
+        
+      </div>
+        
+      <br><br><br>
       <table>
         <tr>
           <th>Product ID</th>
           <th>Product Name</th>
-          <th>Product Image</th>
+          <th style="width: 40%;">Product Image</th>
+          <th>Product Description</th>
         </tr>
 
         <?php
           $opt = "";
 
           while ($row = mysqli_fetch_assoc($result)) {
+            $picid = $row["id"];
             $id = $row["product_id"];
             $name = $row["name"];
+            $description = $row['description'];
 
             $opt .= " <tr class='table-row' data-href='lm_order_item_add_item_information.php?id=$id'>
                         <td>$id</td>
                         <td>$name</td>
-                        <td><image src='../../images/$id.jpg' style='height: 40%;'></td>
+                        <td><image src='../../images/$picid.jpg' style='width: 100%;'></td>
+                        <td>$description</td>
                       </tr>";
           }
 

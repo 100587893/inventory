@@ -2,7 +2,7 @@
   session_start();
   if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && $_SESSION['role'] == 'purchasing') {
     include("pm_topbar.php");
-    include("..\..\connect.php");
+    include("../../connect.php");
   } else {
     header("Location: C:/wamp64/www/index.php");
     exit();
@@ -50,7 +50,7 @@
           echo "<p>Enter all available information. Category, Product Name, Manufacturer, Description, and Minimum Stock are required.</p><br>";
         }
       ?>
-      <form action="<?php if(isset($_GET["edit"])) { echo "add_item_function.php?edit=True&id=$id"; } else { echo "add_item_function.php"; } ?>" method="post">
+      <form action="<?php if(isset($_GET["edit"])) { echo "add_item_function.php?edit=True&id=$id"; } else { echo "add_item_function.php"; } ?>" method="POST">
         <table style="width: 100%;">
           <tr>
             <td><label for="category">Category:</label></td>
@@ -72,7 +72,7 @@
                                                                             ?>" style="width: 100%;"></td>
           </tr>
           <tr>
-            <td><label for="serial">Serial Number:</label></td>
+            <td><label for="serial">Product ID:</label></td>
             <td><input type="text" id="serial" name="serial" value="<?php
                                                                     if (isset($result)) {
                                                                       echo $row["product_id"];
@@ -110,6 +110,15 @@
                                                                           echo $row["min_stock"];
                                                                         }
                                                                       ?>" style="width: 100%;"></td>
+          </tr>
+          <tr>
+            <td><label for="unit">Measurement Unit:</label></td>
+            <td><select id="unit" name="unit" style="width: 100%;">
+                  <option value="Box" <?php if (isset($result)) { if ($row["unit"] == "Box") { echo "selected"; } } ?>>Box</option>
+                  <option value="Item" <?php if (isset($result)) { if ($row["unit"] == "Item") { echo "selected"; } } ?>>Item</option>
+                  <option value="Case" <?php if (isset($result)) { if ($row["unit"] == "Case") { echo "selected"; } } ?>>Case</option>
+                </select>
+            </td>
           </tr>
           <tr>
             <td><label for="image">Image(if applicable):</label></td>

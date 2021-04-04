@@ -11,9 +11,6 @@
   if (isset($_GET['search'])) {
     $searchTerm = $_GET['search'];
   }
-  if (isset($_GET['category'])) {
-    $category = $_GET['category'];
-  }
 ?>
 
 
@@ -78,6 +75,7 @@
           <th>Product Name</th>
           <th>Manufacturer</th>
           <th>Supplier</th>
+          <th>Unit</th>
           <th>Action</th>
         </tr>
 
@@ -86,30 +84,21 @@
           if (isset($searchTerm)) {
             $query = "SELECT * FROM product WHERE name LIKE '%$searchTerm%';";
             $result = mysqli_query($conn, $query);
-
-            while ($row = mysqli_fetch_assoc($result)) {
-              $opt .= " <tr>
-                          <td>" .$row['product_id']. "</td>
-                          <td>" .$row['name']. "</td>
-                          <td>" .$row['manufacturer']. "</td>
-                          <td>" .$row['supplier']. "</td>
-                          <td><a href='add_item_information.php?id=" .$row['product_id']. "&edit=True'><button type='button'>Edit</button></a></td>
-                        </tr>";
-            }
           }
-          elseif (isset($category)) {
-            $query = "SELECT * FROM product WHERE category='$category';";
+          else {
+            $query = "SELECT * FROM product;";
             $result = mysqli_query($conn, $query);
+          }
 
-            while ($row = mysqli_fetch_assoc($result)) {
-              $opt .= " <tr>
-                          <td>" .$row['product_id']. "</td>
-                          <td>" .$row['name']. "</td>
-                          <td>" .$row['manufacturer']. "</td>
-                          <td>" .$row['supplier']. "</td>
-                          <td><a href='add_item_information.php?id=" .$row['product_id']. "&edit=True'><button type='button'>Edit</button></a></td>
-                        </tr>";
-            }
+          while ($row = mysqli_fetch_assoc($result)) {
+            $opt .= " <tr>
+                        <td>" .$row['product_id']. "</td>
+                        <td>" .$row['name']. "</td>
+                        <td>" .$row['manufacturer']. "</td>
+                        <td>" .$row['supplier']. "</td>
+                        <td>" .$row['unit']. "</td>
+                        <td><a href='add_item_information.php?id=" .$row['product_id']. "&edit=True'><button type='button'>Edit</button></a></td>
+                      </tr>";
           }
 
           echo $opt;

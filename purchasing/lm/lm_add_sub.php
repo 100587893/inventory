@@ -30,12 +30,6 @@
         padding-left: 10px;
         border-bottom: 2px solid black;
       }
-      img {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        width: 40%;
-      }
     </style>
   </head>
   <body>
@@ -50,24 +44,24 @@
         }
       ?>
       <br>
-      <img src="../../images/<?php echo $row['id']; ?>.jpg">
+      <img src="../../images/<?php echo $row['id']; ?>.jpg" style='display: block; margin-left: auto; margin-right: auto; width: 40%;'>
       <br>
 
       <?php
         if (isset($_GET['add'])) {
-            echo "  <form action='lm_add_sub_function.php?id=<?php echo $id ?>add=true' method='post'>
+            echo "  <form action='lm_add_sub_function.php?id=$id&add=true' method='post'>
                         <label for='quantity'><b>Quantity:</b></label>
-                        <input type='text' id='quantity' name='quantity' style='width: 100%;'>
+                        <input type='text' id='quantity' name='quantity' style='width: 90%;'><span style='margin-left:10px;'>" .$row['unit']. "</span>
                         <button type='submit' name='button' style='float: right; margin-top: 10px;'>Add</button>
                     </form>";
         }
         else if (isset($_GET['sub'])) {
-            echo "  <form action='lm_add_sub_function.php?id=<?php echo $id ?>sub=true' method='post'>
+            echo "  <form action='lm_add_sub_function.php?id=$id&sub=true' method='post'>
                         <label for='quantity'><b>Quantity:</b></label>
-                        <input type='text' id='quantity' name='quantity' style='width: 100%;'>
-                        <br>
+                        <input type='text' id='quantity' name='quantity' style='width: 90%;'><span style='margin-left:10px;'>" .$row['unit']. "</span>
+                        <br><br>
                         <label for='assign'><b>Given to:</b></label>
-                        <input type='text' id='assign' name='assign' style='width: 100%;'>
+                        <input type='text' id='assign' name='assign' style='width: 90%;'>
                         <button type='submit' name='button' style='float: right; margin-top: 10px;'>Remove</button>
                     </form>";
         }

@@ -27,8 +27,9 @@
       $min_stock = $row['min_stock'];
       $description = $row['description'];
       $serial = $row['serial_number'];
+      $unit = $row['unit'];
 
-      $query = "INSERT INTO product (category, name, supplier, min_stock, manufacturer, description, product_id) VALUES ('$category', '$name', '$supplier', $min_stock, '$manufacturer', '$description', '$serial');";
+      $query = "INSERT INTO product (category, name, supplier, min_stock, manufacturer, description, product_id, unit) VALUES ('$category', '$name', '$supplier', $min_stock, '$manufacturer', '$description', '$serial', '$unit');";
       mysqli_query($conn, $query);
 
       $query = "DELETE FROM item_request WHERE id=$id;";
@@ -92,13 +93,9 @@
     <title>Active Orders</title>
 
     <style>
-      body{
-        margin: 0 auto;
-        background-image: url(../img/bg2.jpg);
-      }
       table{
         border-collapse: collapse;
-        width: 100%;
+        width: 130%;
         font-size:18px;
         margin: 0 auto;
       }

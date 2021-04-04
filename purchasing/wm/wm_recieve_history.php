@@ -81,7 +81,7 @@
 
             while ($row = mysqli_fetch_assoc($result)) {
               $pid = $row['product_id'];
-              $query2 = "SELECT name FROM product WHERE product_id='$pid';";
+              $query2 = "SELECT name, unit FROM product WHERE product_id='$pid';";
               $result2 = mysqli_query($conn, $query2);
               $row2 = mysqli_fetch_assoc($result2);
               $name = $row2['name'];
@@ -89,7 +89,7 @@
               $opt .= " <tr>
                           <td>$pid</td>
                           <td>$name</td>
-                          <td>" .$row['quantity']. "</td>
+                          <td>" .$row['quantity']. " " .$row2['unit']. "</td>
                           <td>" .$row['delivered_by']. "</td>
                           <td>" .$row['received_by']. "</td>
                           <td>" .$row['DATE(time)']. "</td>

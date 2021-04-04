@@ -110,26 +110,80 @@
 
 						<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
 
-							<li class="dropdown-item">
-								<a href="pm_inventory.php?campus=Barrie">Barrie</a>
+							<li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Current</a>
+								<ul class="dropdown-menu dropdown-menu-right">
+									<li class="dropdown-item">
+										<a href="pm_inventory.php?campus=Barrie">Barrie</a>
+									</li>
+									<li class="dropdown-item">
+										<a href="pm_inventory.php?campus=Burlington">Burlington</a>
+									</li>
+									<li class="dropdown-item">
+										<a href="pm_inventory.php?campus=Mississauga">Mississauga</a>
+									</li>
+									<li class="dropdown-item">
+										<a href="pm_inventory.php?campus=Peterborough">Peterborough</a>
+									</li>
+									<li class="dropdown-item">
+										<a href="pm_inventory.php?campus=Scarborough">Scarborough</a>
+									</li>
+									<li class="dropdown-item">
+										<a href="pm_inventory.php?campus=Toronto">Toronto</a>
+									</li>
+									<li class="dropdown-item">
+										<a href="pm_inventory.php?campus=Warehouse">Warehouse</a>
+									</li>
+								</ul>
 							</li>
-							<li class="dropdown-item">
-								<a href="pm_inventory.php?campus=Burlington">Burlington</a>
-							</li>
-							<li class="dropdown-item">
-								<a href="pm_inventory.php?campus=Mississauga">Mississauga</a>
-							</li>
-							<li class="dropdown-item">
-								<a href="pm_inventory.php?campus=Peterborough">Peterborough</a>
-							</li>
-							<li class="dropdown-item">
-								<a href="pm_inventory.php?campus=Scarborough">Scarborough</a>
-							</li>
-							<li class="dropdown-item">
-								<a href="pm_inventory.php?campus=Toronto">Toronto</a>
-							</li>
-							<li class="dropdown-item">
-								<a href="pm_inventory.php?campus=Warehouse">Warehouse</a>
+
+							<li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">History</a>
+								<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+									<li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Additions</a>
+										<ul class="dropdown-menu dropdown-menu-right">
+											<li class="dropdown-item">
+												<a href="pm_add_history.php?campus=Barrie">Barrie</a>
+											</li>
+											<li class="dropdown-item">
+												<a href="pm_add_history.php?campus=Burlington">Burlington</a>
+											</li>
+											<li class="dropdown-item">
+												<a href="pm_add_history.php?campus=Mississauga">Mississauga</a>
+											</li>
+											<li class="dropdown-item">
+												<a href="pm_add_history.php?campus=Peterborough">Peterborough</a>
+											</li>
+											<li class="dropdown-item">
+												<a href="pm_add_history.php?campus=Scarborough">Scarborough</a>
+											</li>
+											<li class="dropdown-item">
+												<a href="pm_add_history.php?campus=Toronto">Toronto</a>
+											</li>
+										</ul>
+									</li>
+
+									<li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Removals</a>
+										<ul class="dropdown-menu dropdown-menu-right">
+											<li class="dropdown-item">
+												<a href="pm_sub_history.php?campus=Barrie">Barrie</a>
+											</li>
+											<li class="dropdown-item">
+												<a href="pm_sub_history.php?campus=Burlington">Burlington</a>
+											</li>
+											<li class="dropdown-item">
+												<a href="pm_sub_history.php?campus=Mississauga">Mississauga</a>
+											</li>
+											<li class="dropdown-item">
+												<a href="pm_sub_history.php?campus=Peterborough">Peterborough</a>
+											</li>
+											<li class="dropdown-item">
+												<a href="pm_sub_history.php?campus=Scarborough">Scarborough</a>
+											</li>
+											<li class="dropdown-item">
+												<a href="pm_sub_history.php?campus=Toronto">Toronto</a>
+											</li>
+										</ul>
+									</li>
+								</ul>
 							</li>
 						</ul>
 					</li>

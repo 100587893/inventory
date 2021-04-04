@@ -1,6 +1,6 @@
 <?php
   session_start();
-  if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && $_SESSSION['role']='local') {
+  if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && $_SESSSION['role']='purchasing') {
 		include("pm_topbar.php");
 		include("..\..\connect.php");
   } else {
@@ -19,7 +19,7 @@
 ?>
 <html>
 	<head>
-		<title>Scarborough</title>
+		<title>Inventory</title>
 		<style>
 		body{
 			margin: 0 auto;
@@ -189,7 +189,7 @@
           echo "<td>" . $row["pm_quantity"]."</td>";
         }
         else {
-          echo "<td>" . $row["quantity"]."</td>";
+          echo "<td>" . $row["quantity"]. " " .$row['unit']. "</td>";
         }
 
 				echo "<td>" . $row["description"]."</td>";

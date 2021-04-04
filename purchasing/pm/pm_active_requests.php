@@ -174,11 +174,14 @@
 
               echo "<div class='containers' style='width: 100%;'>
                       <h5 style='float: left;'>Items supplied by: " .$suppliers[$i]. "</h5>
-                      <a href='generate_po.php?campus=$campus&supplier=$supplier' style='float: right;'><button type='button'>Generate PO</button></a>
-                      <h5 style='float: right; padding-right: 10px;'>Order Total: $$total </h5>
+                      <form action='generate_po.php?campus=$campus&supplier=$supplier' method='post'>
+                          <button type='submit' style='float: right;'>Generate PO</button>
+                          <input type='date' name='required_by' id='required_by' style='float: right; margin-right: 10px;' required><p style='float: right; padding-right: 5px;'><b>Date Required: </b></p>
+                      </form>
+                      <h5 style='float: right; padding-right: 50px;'>Order Total: $$total </h5>
                     </div>";
               echo "<br><br>";
-              echo "<div class='container' style='width: 100%;'>
+              echo "<div class='container' style='min-width: 110%;'>
                       <div class='row-'>
                         <div class='column- header'>
                           <b>Date Ordered</b>
@@ -234,14 +237,14 @@
                               </div>
 
                               <div class='content'>
-                                <h5>$pid</h5>
+                                <h5>" .$row['username']. "</h5>
                               </div>
 
                               <div class='content'>
-                                <h5>" .$row['username']. "</h5>
+                                <h5>$pid</h5>
                               </div>";
 
-                  $query2 = "SELECT name, price FROM product WHERE product_id='$pid';";
+                  $query2 = "SELECT name, price, unit FROM product WHERE product_id='$pid';";
                   $result2 = mysqli_query($conn, $query2);
                   $row2 = mysqli_fetch_assoc($result2);
                   $name = $row2['name'];
@@ -252,7 +255,7 @@
 
                               <div class='content'>
                                 <form id='" .$rid.$pid. "actionForm' action='pm_active_requests.php?campus=$campus&rid=$rid&pid=$pid' method='post'>
-                                  <input type='text' name='quantity' value='" .$row['quantity']. "' style='width: 100px;'>
+                                  <input type='number' name='quantity' value='" .$row['quantity']. "' style='width: 50px;'><span style='margin-left:5px;'>" .$row2['unit']. "</span>
                                   <input type='hidden' name='action' value=''>
                                   <a href='javascript:{}' onclick='document.getElementById('" .$rid.$pid. "actionForm').action.value='update'; document.getElementById('" .$rid.$pid. "actionForm').submit();'><button type='submit' name='update' form='" .$rid.$pid. "actionForm'>Update</button></a>
                                 </form>

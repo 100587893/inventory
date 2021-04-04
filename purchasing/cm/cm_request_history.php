@@ -23,7 +23,7 @@
   }
 
   if (isset($_GET['recieve'])) {
-    $query = "UPDATE requests SET status='recieved' WHERE (status='shipped' OR status='couriered') AND campus='$campus' AND r_id=$rid AND product_id='$pid';";
+    $query = "UPDATE requests SET status='recieved' WHERE (status='shipped' OR status='ordered') AND campus='$campus' AND r_id=$rid AND product_id='$pid';";
     mysqli_query($conn, $query);
 
     $query = "SELECT * FROM $local_inv WHERE product_id='$pid';";
@@ -139,7 +139,7 @@
               $pid = $row['product_id'];
               $quantity = $row['quantity'];
 
-              $query = "SELECT name FROM product WHERE product_id='$pid';";
+              $query = "SELECT name, unit FROM product WHERE product_id='$pid';";
               $result2 = mysqli_query($conn, $query);
 
               if ($result) {
@@ -151,11 +151,11 @@
                           <td>" .$row['username']. "</td>
                           <td>$pid</td>
                           <td>" .$row2['name']. "</td>
-                          <td>" .$row['quantity']. "</td>
+                          <td>" .$row['quantity']. " " .$row2['unit']. "</td>
                           <td>" .$row['status']. "</td>
                           <td>" .$row['DATE(update_time)']. "</td>";
 
-              if ($row['status'] == 'shipped' or $row['status'] == 'couriered') {
+              if ($row['status'] == 'shipped' or $row['status'] == 'ordered') {
                 $opt .= "<td><a href='cm_request_history.php?recieve=true&rid=$rid&pid=$pid&quantity=$quantity'><button>Recieve</button></a></td>";
               }
 
@@ -195,7 +195,7 @@
             while ($row = mysqli_fetch_assoc($result)) {
               $pid = $row['product_id'];
 
-              $query = "SELECT name FROM product WHERE product_id='$pid';";
+              $query = "SELECT name, unit FROM product WHERE product_id='$pid';";
               $result2 = mysqli_query($conn, $query);
 
               if ($result) {
@@ -207,7 +207,7 @@
                           <td>" .$row['username']. "</td>
                           <td>$pid</td>
                           <td>" .$row2['name']. "</td>
-                          <td>" .$row['quantity']. "</td>
+                          <td>" .$row['quantity']. " " .$row2['unit']. "</td>
                           <td>" .$row['status']. "</td>
                           <td>" .$row['DATE(update_time)']. "</td>
                         </tr>";
@@ -246,7 +246,7 @@
             while ($row = mysqli_fetch_assoc($result)) {
               $pid = $row['product_id'];
 
-              $query = "SELECT name FROM product WHERE product_id='$pid';";
+              $query = "SELECT name, unit FROM product WHERE product_id='$pid';";
               $result2 = mysqli_query($conn, $query);
 
               if ($result) {
@@ -258,7 +258,7 @@
                           <td>" .$row['username']. "</td>
                           <td>$pid</td>
                           <td>" .$row2['name']. "</td>
-                          <td>" .$row['quantity']. "</td>
+                          <td>" .$row['quantity']. " " .$row2['unit']. "</td>
                           <td>" .$row['status']. "</td>
                           <td>" .$row['DATE(update_time)']. "</td>
                         </tr>";

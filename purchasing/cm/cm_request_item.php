@@ -34,7 +34,7 @@
         padding-bottom: 10px;
         padding-right: 10px;
         padding-left: 10px;
-        border-bottom: 2px solid black;
+        border-bottom: 1px solid black;
       }
     </style>
   </head>
@@ -110,8 +110,17 @@
                                                                         }
                                                                       ?>" style="width: 100%;"></td>
           </tr>
+          <tr>
+            <td><label for="unit">Measurement Unit:</label></td>
+            <td><select id="unit" name="unit" style="width: 100%;">
+                  <option value="box" <?php if (isset($result)) { if ($row["unit"] == "Box") { echo "selected"; } } ?>>Box</option>
+                  <option value="box" <?php if (isset($result)) { if ($row["unit"] == "Item") { echo "selected"; } } ?>>Item</option>
+                  <option value="box" <?php if (isset($result)) { if ($row["unit"] == "Case") { echo "selected"; } } ?>>Case</option>
+                </select>
+            </td>
+          </tr>
         </table>
-        <button type="submit" name="button" style="float: right; margin-top: 10px;">Submit</button>
+        <button type="submit" class="btn btn-primary" style="float: right; margin-top: 10px;">Submit</button>
       </form>
     </div>
   </body>

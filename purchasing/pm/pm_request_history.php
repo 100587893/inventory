@@ -88,7 +88,7 @@
             while ($row = mysqli_fetch_assoc($result)) {
               $pid = $row['product_id'];
 
-              $query = "SELECT name FROM product WHERE product_id='$pid';";
+              $query = "SELECT name, unit FROM product WHERE product_id='$pid';";
               $result2 = mysqli_query($conn, $query);
               $row2 = mysqli_fetch_assoc($result2);
 
@@ -97,7 +97,7 @@
                           <td>" .$row['username']. "</td>
                           <td>$pid</td>
                           <td>" .$row2['name']. "</td>
-                          <td>" .$row['quantity']. "</td>
+                          <td>" .$row['quantity']. " " .$row2['unit']. "</td>
                           <td>" .$row['status']. "</td>
                           <td>" .$row['DATE(update_time)']. "</td>
                         </tr>";
@@ -136,7 +136,7 @@
             while ($row = mysqli_fetch_assoc($result)) {
               $pid = $row['product_id'];
 
-              $query = "SELECT name FROM product WHERE product_id='$pid';";
+              $query = "SELECT name, unit FROM product WHERE product_id='$pid';";
               $result2 = mysqli_query($conn, $query);
               $row2 = mysqli_fetch_assoc($result2);
 
@@ -145,7 +145,7 @@
                           <td>" .$row['username']. "</td>
                           <td>$pid</td>
                           <td>" .$row2['name']. "</td>
-                          <td>" .$row['quantity']. "</td>
+                          <td>" .$row['quantity']. " " .$row2['unit']. "</td>
                           <td>" .$row['status']. "</td>
                           <td>" .$row['DATE(update_time)']. "</td>
                         </tr>";
@@ -184,7 +184,7 @@
             while ($row = mysqli_fetch_assoc($result)) {
               $pid = $row['product_id'];
 
-              $query = "SELECT name FROM product WHERE product_id='$pid';";
+              $query = "SELECT name, unit FROM product WHERE product_id='$pid';";
               $result2 = mysqli_query($conn, $query);
               $row2 = mysqli_fetch_assoc($result2);
 
@@ -193,7 +193,7 @@
                           <td>" .$row['username']. "</td>
                           <td>$pid</td>
                           <td>" .$row2['name']. "</td>
-                          <td>" .$row['quantity']. "</td>
+                          <td>" .$row['quantity']. " " .$row2['unit']. "</td>
                           <td>" .$row['status']. "</td>
                           <td>" .$row['DATE(update_time)']. "</td>
                         </tr>";

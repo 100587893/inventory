@@ -89,7 +89,7 @@
 						</td>
 					</tr>
 				</table>
-				<button type="submit" name="button" style="float: right; margin-top: 10px;">Submit</button>
+				<button type="submit" name="button" style="float: right; margin-top: 10px;">Save</button>
 			</form>
 		</div>
 	</body>

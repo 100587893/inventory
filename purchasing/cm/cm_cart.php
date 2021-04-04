@@ -108,17 +108,19 @@
                   </tr>";
             while ($row = mysqli_fetch_assoc($result)) {
               $pid = $row['product_id'];
-              $query = "SELECT name FROM product WHERE product_id='$pid';";
+              $query = "SELECT name, unit FROM product WHERE product_id='$pid';";
               $res = mysqli_query($conn, $query);
               $row2 = mysqli_fetch_assoc($res);
+              
               $name = $row2['name'];
               $quantity = $row['quantity'];
+              $unit = $row2['unit'];
 
               $opt .= " <form action='cm_cart.php?pid=$pid' method='post'>
                           <tr>
                             <td>$pid</td>
                             <td>$name</td>
-                            <td><input type='text' name='quantity' value='$quantity'></td>
+                            <td><input type='text' name='quantity' value='$quantity'><span style='margin-left:10px;'>$unit</span></td>
                             <td><button type='submit' formaction='cm_cart.php?pid=$pid&edit=true' style='float: left; width: 49%;'>Update</button>
                                 <button type='submit' formaction='cm_cart.php?pid=$pid&delete=true' style='float: right; width: 49%;'>Delete</button></td>
                           </tr>

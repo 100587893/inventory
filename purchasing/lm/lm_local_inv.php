@@ -162,7 +162,7 @@
 				echo "<td>" . $row["product_id"]."</td>";
 				echo "<td>" . $row["name"]."</td>";
 				echo "<td>" . $row["manufacturer"]."</td>";
-				echo "<td>" . $row["quantity"]."</td>";
+				echo "<td>" . $row["quantity"]. " " .$row['unit']. "</td>";
 				echo "<td>" . $row["description"]."</td>";
 				echo "	<td>
 							<a href='lm_add_sub.php?id=$productid&add=true' style='width: 50%; float: left;'><button type='button'>Add</button></a>

@@ -2,8 +2,8 @@
     session_start();
     if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && $_SESSION['role'] == 'purchasing') {
         include("pm_topbar.php");
-        include("..\..\connect.php");
-        include("..\..\mailer.php");
+        include("../../connect.php");
+        include("../../mailer.php");
     } else {
         header("Location: C:/wamp64/www/index.php");
         exit();
@@ -23,6 +23,25 @@
             $requester = $row['requester'];
             $loc = $row['location'];
 
+            $query = "SELECT fullname, email FROM user WHERE fullname='$requester';";
+            $result = mysqli_query($conn, $query);
+            $row = mysqli_fetch_assoc($result);
+
+            $email = $row['email'];
+            $name = $row['fullname'];
+
+            $mail->addAddress($email, $name);
+            $mail->isHTML(true);
+            $mail->Subject = "Purchasing - Order Update";
+            $mail->Body = "<i>Your order has been processed and is on the way.<i>";
+            $mail->AltBody = "Your order has been processed and is on the way.";
+
+            try {
+                $mail->send();
+            } catch (Exception $e) {
+                echo $e;
+            }
+
             $query = "SELECT name, email FROM suppliers WHERE name='$supplier';";
             $result = mysqli_query($conn, $query);
             $row = mysqli_fetch_assoc($result);
@@ -36,25 +55,6 @@
             $mail->Body = "<i>Please see attached, thanks.<i>";
             $mail->AltBody = "Please see attached, thanks.";
             $mail->addAttachment($loc);
-
-            try {
-                $mail->send();
-            } catch (Exception $e) {
-                echo $e;
-            }
-
-            $query = "SELECT fullname, email FROM user WHERE fullname='$requester';";
-            $result = mysqli_query($conn, $query);
-            $row = mysqli_fetch_assoc($result);
-
-            $email = $row['email'];
-            $name = $row['fullname'];
-
-            $mail->addAddress($email, $name);
-            $mail->isHTML(true);
-            $mail->Subject = "Purchasing - Order Update";
-            $mail->Body = "<i>Your order has been processed and is on the way.<i>";
-            $mail->AltBody = "Your order has been processed and is on the way.";
 
             try {
                 $mail->send();
@@ -122,6 +122,9 @@
                 font-size: 20px;
                 font-family: Tahoma, Geneva, sans-serif;
             }
+            td {
+                height: 35px;
+            }
             table, th, td {
                 border: 1px solid black;
                 text-align:center;
@@ -156,11 +159,13 @@
                             <th>Location</th>
                             <th>Status</th>
                             <th>Action</th>
+                            <th>Download</th>
                         </tr>
 
                         <?php 
                             while ($row = mysqli_fetch_assoc($result)) {
                                 $id = $row['id'];
+                                $location = $row['location'];
                                 echo "  <tr>
                                             <td>" .$row['id']. "</td>
                                             <td>" .$row['location']. "</td>
@@ -170,8 +175,12 @@
                                     echo "      <a href='po_management.php?campus=$campus&email=true&id=$id' style='width: 50%'><button type='button'>Email</button></a>
                                                 <a href='po_management.php?campus=$campus&other=true&id=$id' style='width: 50%'><button type='button'>Other</button></a>";
                                 }
-                                            "</td>
-                                        </tr>";
+                                
+                                echo   "</td>
+                                        <td>
+                                            <a href='pdf_download.php?campus=$campus&other=true&id=$id'><button type='button'>Download File</button></a>
+                                        </td>
+                                    </tr>";
                             }
                         ?>
 

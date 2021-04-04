@@ -25,5 +25,5 @@
         mysqli_query($conn, $query);
     }
     
-    header("Location: pm_home.php");
+    header("Location: supplier_management.php");
 ?>

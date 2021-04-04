@@ -189,14 +189,12 @@
             $rid = $row['r_id'];
             $pid = $row['product_id'];
 
-            $query = "SELECT name, product_id FROM product WHERE product_id='$pid';";
-            $result = mysqli_query($conn, $query);
+            $query = "SELECT name, product_id, unit FROM product WHERE product_id='$pid';";
+            $result2 = mysqli_query($conn, $query);
 
-            if ($result) {
-              $row2 = mysqli_fetch_assoc($result);
-              $name = $row2['name'];
-              $p_id = $row2['product_id'];
-            }
+            $row2 = mysqli_fetch_assoc($result2);
+            $name = $row2['name'];
+            $unit = $row2['unit'];
 
             $opt .= " <div class='row-'>
                         <div class='content'>
@@ -208,7 +206,7 @@
                         </div>
 
                         <div class='content'>
-                          <h5>$p_id</h5>
+                          <h5>$pid</h5>
                         </div>
 
                         <div class='content'>
@@ -217,7 +215,7 @@
 
                         <div class='content'>
                           <form id='" .$rid.$pid. "actionForm' action='cm_active_requests.php?rid=$rid&pid=$pid' method='post'>
-                            <input type='text' name='quantity' value='" .$row['quantity']. "'>
+                            <input type='text' name='quantity' value='" .$row['quantity']. "'><span style='margin-left:10px;'>$unit</span>
                             <input type='hidden' name='action' value=''>
                           </form>
                         </div>

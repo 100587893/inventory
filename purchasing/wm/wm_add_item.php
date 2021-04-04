@@ -53,11 +53,11 @@
         <table style="width: 100%;">
           <tr>
             <td><label for="quantity">Quantity:</label></td>
-            <td><input type="text" id="quantity" name="quantity"></td>
+            <td><input type="number" id="quantity" name="quantity" style="width: 90%;"><span style="margin-left:10px;"><?php echo $row['unit']; ?></span></td>
           </tr>
           <tr>
             <td><label for="delivered_by">Delivered By:</label></td>
-            <td><input type="text" id="delivered_by" name="delivered_by"></td>
+            <td><input type="text" id="delivered_by" name="delivered_by" style="width: 90%;"></td>
           </tr>
         </table>
         <button type="submit" name="button" style="float: right; margin-top: 10px;">Submit</button>

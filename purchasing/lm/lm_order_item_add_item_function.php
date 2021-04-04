@@ -22,15 +22,15 @@
   if (mysqli_num_rows($result) != 0) {
     while ($row = mysqli_fetch_assoc($result)) {
       if ($row['username'] != $username) {
-        $query = "SELECT MAX(r_id) FROM requests;";
+        $query = "SELECT MAX(r_id) as rid FROM requests;";
         $result2 = mysqli_query($conn, $query);
         $row2 = mysqli_fetch_assoc($result2);
-        $num1 = $row2['r_id'];
+        $num1 = $row2['rid'];
 
-        $query = "SELECT MAX(r_id) FROM cart;";
+        $query = "SELECT MAX(r_id) as rid FROM cart;";
         $result2 = mysqli_query($conn, $query);
         $row2 = mysqli_fetch_assoc($result2);
-        $num2 = $row2['r_id'];
+        $num2 = $row2['rid'];
 
         $rid = max($num1, $num2) + 1;
       }

@@ -26,6 +26,14 @@
 
   $query = "SELECT * FROM cart WHERE username='$username';";
   $result = mysqli_query($conn, $query);
+
+  if ($result->num_rows > 0) {
+    $row2 = $result->fetch_assoc();
+    $kit = $row2['kit'];
+  }
+
+  $query = "SELECT * FROM cart WHERE username='$username';";
+  $result = mysqli_query($conn, $query);
 ?>
 
 
@@ -69,13 +77,10 @@
   			color: black;
   			font-size: 20px;
   		}
-  		button{
+  		.button2 {
   			background-color: #4ef542;
   			height: 30px;
   			width: 75px;
-  		}
-  		.button2{
-  			background-color: #ff7373;
   		}
       .outside{
   			font-size: 40px;
@@ -104,27 +109,35 @@
                     <th>Action</th>
                   </tr>";
             while ($row = mysqli_fetch_assoc($result)) {
-              $pid = $row['p_id'];
-              $query = "SELECT name FROM product WHERE product_id='$pid';";
+              $pid = $row['product_id'];
+              $query = "SELECT name, unit FROM product WHERE product_id='$pid';";
               $res = mysqli_query($conn, $query);
               $row2 = mysqli_fetch_assoc($res);
+              
               $name = $row2['name'];
               $quantity = $row['quantity'];
+              $unit = $row2['unit'];
 
               $opt .= " <form action='lm_cart.php?pid=$pid' method='post'>
                           <tr>
                             <td>$name</td>
-                            <td><input type='text' name='quantity' value='$quantity'></td>
-                            <td><button type='submit' formaction='lm_cart.php?pid=$pid&edit=true' style='float: left; width: 49%;'>Update</button>
-                                <button type='submit' formaction='lm_cart.php?pid=$pid&delete=true' style='float: right; width: 49%;'>Delete</button></td>
+                            <td><input type='text' name='quantity' value='$quantity'><span style='margin-left:10px;'>$unit</span></td>
+                            <td><button class='button2' type='submit' formaction='lm_cart.php?pid=$pid&edit=true' style='float: left; width: 49%;'>Update</button>
+                                <button class='button2' type='submit' formaction='lm_cart.php?pid=$pid&delete=true' style='float: right; width: 49%;'>Delete</button></td>
                           </tr>
                         </form>";
             }
 
             echo $opt;
             echo "</table>
-                  <br>
-                  <a href='lm_cart_submit_function.php'><button style='float: right; width: 20%;'>Submit Order</button></a>";
+                  <br>";
+
+            if ($kit != NULL) {
+              echo "<a href='lm_cart_submit_function.php?kit=$kit'><button class='button2' style='float: right; width: 20%;'>Submit Order</button></a>";
+            }
+            else {
+              echo "<a href='lm_cart_submit_function.php'><button class='button2' style='float: right; width: 20%;'>Submit Order</button></a>";
+            }
           }
         ?>
     </div>

@@ -39,7 +39,7 @@
 
 		//redirects based on permission
 		if($access == 'admin'){
-			header('Location: admin.php');
+			header('Location: purchasing/admin/pm_home.php');
 			exit();
 		}
 		elseif($access == 'purchasing'){

@@ -1,8 +1,8 @@
 <?php
 	session_start();
 	if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && $_SESSION['role'] == 'purchasing') {
-		include("..\..\connect.php");
-		include("..\..\mailer.php");
+		include("../../connect.php");
+		include("../../mailer.php");
 		require_once("../vendor/autoload.php");
 	} else {
 		header("Location: C:/wamp64/www/index.php");
@@ -11,12 +11,13 @@
 
 	$campus = $_GET['campus'];
 	$supplier = $_GET['supplier'];
+	$required_by = $_POST['required_by'];
 
 	$query = "SELECT id FROM purchase_orders ORDER BY id DESC LIMIT 1;";
 	$result = mysqli_query($conn, $query);
 	$row = mysqli_fetch_assoc($result);
 	$num = $row['id'];
-	$id = $num + 1;
+	$po_id = $num + 1;
 
 	$query = "SELECT * FROM requests WHERE status='approved' AND campus='$campus' AND supplier='$supplier';";
 	$result = mysqli_query($conn, $query);
@@ -43,6 +44,7 @@
 	$contact = $row['contact'];
 
 	$order_total = 0.0;
+	$item_total = 0.0;
 
 	$html = "
 			<style>
@@ -81,7 +83,7 @@
 
 				<p><b>Date Ordered:</b> " .date('m/d/Y'). "</p>
 				<p><b>P.O. #:</b> $id</p>
-				<p><b>Date Required:</b> <i>date</i></p>
+				<p><b>Date Required:</b> $required_by</p>
 				<p><b>Requester's Name:</b> $fullname</p>
 				<br>
 
@@ -117,34 +119,79 @@
 						<th>Item Total</th>
 					</tr>";
 	
+	$query = "SELECT * FROM requests INNER JOIN product ON requests.product_id=product.product_id WHERE requests.status='approved' AND requests.campus='$campus' AND requests.supplier='$supplier';";
+	$result = mysqli_query($conn, $query);
+	$row = $result->fetch_assoc();
+	$name = $row['name'];
+	$qnty = $row['quantity'];
+	$pid = $row['product_id'];
+	$rid = $row['r_id'];
+
+
 	$query = "SELECT * FROM requests WHERE status='approved' AND campus='$campus' AND supplier='$supplier';";
 	$result = mysqli_query($conn, $query);
-	
-	while ($row = mysqli_fetch_assoc($result)) {
-		$rid = $row['r_id'];
-		$pid = $row['product_id'];
-		$quantity = $row['quantity'];
-		$unit_price = $row['unit_price'];
 
-		$query = "SELECT * FROM product WHERE product_id='$pid';";
-		$result2 = mysqli_query($conn, $query);
-		$row2 = mysqli_fetch_assoc($result2);
+	if (strpos($name, "Kit") !== false) {
+		$sql = "SELECT * FROM kit WHERE kit='$name';";
+		$result2 = $conn->query($sql);
 
-		$serial = $row2['product_id'];
-		$description = $row2['description'];
-		$item_total = $quantity*$unit_price;
+		while ($row = $result2->fetch_assoc()) {
+			$id = $row['product_id'];
+			$kit_qnty = $row['quantity'];
 
-		$html .= "	<tr>
-						<td>$serial</td>
+			$sql = "SELECT * FROM product WHERE product_id='$id';";
+			$result3 = $conn->query($sql);
+			$row3 = $result3->fetch_assoc();
+
+			$description = $row3['description'];
+			$unit_price = $row3['price'];
+
+			$quantity = $qnty * $kit_qnty;
+			$item_total = $quantity * $unit_price;
+
+			$html .= "<tr>
+						<td>$id</td>
 						<td>$description</td>
 						<td>$quantity</td>
 						<td>$ " .$unit_price. "</td>
 						<td>$ " .$item_total. "</td>
 					</tr>";
-		$order_total += $item_total;
+			
+			$order_total += $item_total;
+			$item_total = 0.0;
+		}
 
 		$query = "UPDATE requests SET po_number=$id WHERE r_id=$rid and product_id='$pid';";
 		mysqli_query($conn, $query);
+	}
+	else {
+		while ($row = mysqli_fetch_assoc($result)) {
+			$rid = $row['r_id'];
+			$pid = $row['product_id'];
+			$quantity = $row['quantity'];
+			$unit_price = $row['unit_price'];
+			
+			$query = "SELECT * FROM product WHERE product_id='$pid';";
+			$result2 = mysqli_query($conn, $query);
+			$row2 = mysqli_fetch_assoc($result2);
+			
+			$serial = $row2['product_id'];
+			$description = $row2['description'];
+			$item_total = $quantity*$unit_price;
+			
+			$html .= "	<tr>
+							<td>$serial</td>
+							<td>$description</td>
+							<td>$quantity</td>
+							<td>$ " .$unit_price. "</td>
+							<td>$ " .$item_total. "</td>
+						</tr>";
+			$order_total += $item_total;
+			$item_total = 0.0;
+			
+			$query = "UPDATE requests SET po_number=$id WHERE r_id=$rid and product_id='$pid';";
+			mysqli_query($conn, $query);
+		}
 	}
 
 	$html .= "</table>
@@ -154,12 +201,12 @@
 	
 	$pdf = new \Mpdf\Mpdf();
 
-	$file_location = "PO_" .$id. ".pdf";
+	$file_location = "../../po/PO_" .$po_id. ".pdf";
 
 	$pdf->WriteHTML($html);
 	$pdf->Output($file_location, "F");
 
-	$query = "INSERT INTO purchase_orders VALUES ($id, '$file_location', 'approved', '$supplier', '$campus', '$fullname');";
+	$query = "INSERT INTO purchase_orders VALUES ($po_id, '$file_location', 'approved', '$supplier', '$campus', '$fullname');";
 	mysqli_query($conn, $query);
 
 	// $query = "UPDATE requests SET status='shipped' WHERE status='approved' AND campus='$campus' AND supplier='$supplier';";
