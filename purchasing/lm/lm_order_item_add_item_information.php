@@ -47,7 +47,7 @@
 
       <form action="lm_order_item_add_item_function.php?id=<?php echo $id ?>" method="post">
         <label for="quantity"><b>Quantity:</b></label>
-        <input type="text" id="quantity" name="quantity" style="width: 90%;"><span style="margin-left:10px;"><?php echo $row['unit']; ?></span>
+        <input type="number" id="quantity" name="quantity" style="width: 90%;"><span style="margin-left:10px;"><?php echo $row['unit']; ?></span>
         <button type="submit" name="button" style="float: right; margin-top: 10px;">Add To Order</button>
       </form>
     </div>

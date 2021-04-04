@@ -11,12 +11,9 @@
   $mail->isSMTP();
   $mail->Host = "smtp.office365.com";
   $mail->SMTPAuth = true;
-  $mail->Username = "oxfordphptest@outlook.com";
-  $mail->Password = "Futica670";
+  $mail->Username = "inventory@projecttest.ca";
+  $mail->Password = "Project2021";
   $mail->Port = 587;
 
-  $mail->setFrom("oxfordphptest@outlook.com", "Oxford Test");
-
-  // $mail->From = "oxfordphptest@outlook.com";
-  // $mail->FromName = "Oxford Test";
+  $mail->setFrom("inventory@projecttest.ca", "Inventory Management");
 ?>
