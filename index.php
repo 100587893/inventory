@@ -56,7 +56,13 @@
 		<br>
 		<br>
         <div class="container">
-			<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
         	<h2>Inventory and Purchase Ordering</h2>
         	<br>
 		<form action="authorize.php" method="POST">
