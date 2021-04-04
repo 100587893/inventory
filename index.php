@@ -55,13 +55,17 @@
 	<body>
 		<br>
 		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
         <div class="container">
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
 		<br>
         	<h2>Inventory and Purchase Ordering</h2>
         	<br>
