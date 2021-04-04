@@ -4,7 +4,7 @@
   $id = $_GET["id"];
 
   $connect = mysqli_connect("localhost:3306", "root", "", "INVMS");
-  $query = "SELECT * FROM products WHERE p_id LIKE $id;"
+  $query = "SELECT * FROM products WHERE p_id LIKE $id;";
   $result = mysqli_query($connect, $query);
 
 ?>

@@ -2,7 +2,7 @@
 	session_start();
 	if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && $_SESSION['role'] == 'warehouse') {
 		include("wm_topbar.php");
-		include("..\..\connect.php");
+		include("../../connect.php");
 	} else {
 		header("Location: C:/wamp64/www/index.php");
 		exit();
