@@ -1,7 +1,7 @@
 <?php
-	$servername="localhost";
-	$username="root";
-	$password="Madinat$902";
+	$servername="fssys.cxe6ysgxahgj.us-east-2.rds.amazonaws.com";
+	$username="admin";
+	$password="MqnYpgXgnIBW2HKSFbk4";
 	$dbname="invms";
 
 	//Create connection
