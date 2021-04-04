@@ -163,7 +163,7 @@
      	 	<th class="table1">Description</th>
       </tr>
 		<?php
-    $inv = $campus ."_inv";
+    $inv = strtolower($campus ."_inv");
 		//Static Query
 
 		if (isset($_POST['search'])) {
