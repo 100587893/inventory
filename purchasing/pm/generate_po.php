@@ -1,0 +1,169 @@
+<?php
+	session_start();
+	if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && $_SESSION['role'] == 'purchasing') {
+		include("..\..\connect.php");
+		include("..\..\mailer.php");
+		require_once("../vendor/autoload.php");
+	} else {
+		header("Location: C:/wamp64/www/index.php");
+		exit();
+	}
+
+	$campus = $_GET['campus'];
+	$supplier = $_GET['supplier'];
+
+	$query = "SELECT id FROM purchase_orders ORDER BY id DESC LIMIT 1;";
+	$result = mysqli_query($conn, $query);
+	$row = mysqli_fetch_assoc($result);
+	$num = $row['id'];
+	$id = $num + 1;
+
+	$query = "SELECT * FROM requests WHERE status='approved' AND campus='$campus' AND supplier='$supplier';";
+	$result = mysqli_query($conn, $query);
+	$row = mysqli_fetch_assoc($result);
+	$uname = $row['username'];
+
+	$query = "SELECT fullname, campus FROM user WHERE username='$uname';";
+	$result = mysqli_query($conn, $query);
+	$row = mysqli_fetch_assoc($result);
+	$fullname = $row['fullname'];
+	$campus = $row['campus'];
+
+	$query = "SELECT address FROM campuses WHERE campus='$campus';";
+	$result = mysqli_query($conn, $query);
+	$row = mysqli_fetch_assoc($result);
+	$address = $row['address'];
+
+	$query = "SELECT * FROM suppliers WHERE name='$supplier';";
+	$result = mysqli_query($conn, $query);
+	$row = mysqli_fetch_assoc($result);
+	$phone = $row['phone_number'];
+	$fax = $row['fax_number'];
+	$email = $row['email'];
+	$contact = $row['contact'];
+
+	$order_total = 0.0;
+
+	$html = "
+			<style>
+				h1 {
+					text-align: center;
+				}
+				.subtext_label {
+					text-align: center;
+				}
+				div.container1 {
+					width: 25%;
+					float: left;
+					border: 1px solid black;
+					padding: 5px;
+				}
+				div.container2 {
+					width: 25%;
+					float: left;
+					border-style: solid solid solid solid;
+					border-width: 1px 1px 1px 1pxl;
+					border-color: black black black black;
+					padding: 5px;
+					margin-left: 45px;
+				}
+				table {
+					width: 100%;
+				}
+				table, tr, th, td {
+					border: 1px solid black;
+				}
+			</style>
+
+			<div class='container'>
+				<h1>Purchase Order</h1>
+				<p class='subtext_label'><b>Supplier: </b> $supplier</p>
+
+				<p><b>Date Ordered:</b> " .date('m/d/Y'). "</p>
+				<p><b>P.O. #:</b> $id</p>
+				<p><b>Date Required:</b> <i>date</i></p>
+				<p><b>Requester's Name:</b> $fullname</p>
+				<br>
+
+				<div class='container1'>
+					<h5><b>Bill To:</b></h5>
+					<p>Oxford College</p>
+					<p>670 Progress Avenue,</p>
+					<p>Scarborough, Ontario, Canada</p>
+					<p>M1H 2W6</p>
+				</div>
+
+				<div class='container2'>
+					<h5><b>Ship To:</b></h5>
+					<p>Oxford College</p>
+					<p>$address</p>
+				</div>
+
+				<div class='container2'>
+					<p><b>Terms:</b> Credit Card</p>
+					<p><b>Phone:</b> $phone</p>
+					<p><b>Fax:</b> $fax</p>
+					<p><b>Email:</b> $email</p>
+					<p><b>Contact:</b> $contact</p>
+				</div>
+				<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+				<table>
+					<tr>
+						<th>Item Number</th>
+						<th>Description</th>
+						<th>Quantity</th>
+						<th>Unit Price</th>
+						<th>Item Total</th>
+					</tr>";
+	
+	$query = "SELECT * FROM requests WHERE status='approved' AND campus='$campus' AND supplier='$supplier';";
+	$result = mysqli_query($conn, $query);
+	
+	while ($row = mysqli_fetch_assoc($result)) {
+		$rid = $row['r_id'];
+		$pid = $row['product_id'];
+		$quantity = $row['quantity'];
+		$unit_price = $row['unit_price'];
+
+		$query = "SELECT * FROM product WHERE product_id='$pid';";
+		$result2 = mysqli_query($conn, $query);
+		$row2 = mysqli_fetch_assoc($result2);
+
+		$serial = $row2['product_id'];
+		$description = $row2['description'];
+		$item_total = $quantity*$unit_price;
+
+		$html .= "	<tr>
+						<td>$serial</td>
+						<td>$description</td>
+						<td>$quantity</td>
+						<td>$ " .$unit_price. "</td>
+						<td>$ " .$item_total. "</td>
+					</tr>";
+		$order_total += $item_total;
+
+		$query = "UPDATE requests SET po_number=$id WHERE r_id=$rid and product_id='$pid';";
+		mysqli_query($conn, $query);
+	}
+
+	$html .= "</table>
+				<br>
+				<h5 class='total_label' style='float: right;'><b>Order Total:</b> $" .$order_total. "</h5>
+			</div>";
+	
+	$pdf = new \Mpdf\Mpdf();
+
+	$file_location = "PO_" .$id. ".pdf";
+
+	$pdf->WriteHTML($html);
+	$pdf->Output($file_location, "F");
+
+	$query = "INSERT INTO purchase_orders VALUES ($id, '$file_location', 'approved', '$supplier', '$campus', '$fullname');";
+	mysqli_query($conn, $query);
+
+	// $query = "UPDATE requests SET status='shipped' WHERE status='approved' AND campus='$campus' AND supplier='$supplier';";
+	// mysqli_query($conn, $query);
+
+	header("Location: po_management.php?campus=$campus");
+?>
