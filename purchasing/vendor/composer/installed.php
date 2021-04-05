@@ -31,25 +31,21 @@
     ),
     'myclabs/deep-copy' => 
     array (
-      'pretty_version' => '1.10.2',
-      'version' => '1.10.2.0',
+      'pretty_version' => '1.7.0',
+      'version' => '1.7.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '776f831124e9c62e1a2c601ecc52e776d8bb7220',
-      'replaced' => 
-      array (
-        0 => '1.10.2',
-      ),
+      'reference' => '3b8a3a99ba1f6a3952ac2747d989303cbd6b7a3e',
     ),
     'paragonie/random_compat' => 
     array (
-      'pretty_version' => 'v9.99.100',
-      'version' => '9.99.100.0',
+      'pretty_version' => 'v2.0.19',
+      'version' => '2.0.19.0',
       'aliases' => 
       array (
       ),
-      'reference' => '996434e5492cb4c3edcb9168db6fbb1359ef965a',
+      'reference' => '446fc9faa5c2a9ddf65eb7121c0af7e857295241',
     ),
     'phpmailer/phpmailer' => 
     array (
@@ -77,15 +73,6 @@
       array (
       ),
       'reference' => 'f2246c8669bd25834f5c264425eb0e250d7a9312',
-    ),
-    'tecnickcom/tcpdf' => 
-    array (
-      'pretty_version' => '6.3.5',
-      'version' => '6.3.5.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '19a535eaa7fb1c1cac499109deeb1a7a201b4549',
     ),
   ),
 );
