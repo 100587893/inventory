@@ -201,7 +201,7 @@
 	
 	$pdf = new \Mpdf\Mpdf();
 
-	$file_location = "PO_" .$po_id. ".pdf";
+	$file_location = "../../po/PO_" .$po_id. ".pdf";
 
 	$pdf->WriteHTML($html);
 	$pdf->Output($file_location, "F");
