@@ -12,7 +12,7 @@
   $mail->Host = "smtp.office365.com";
   $mail->SMTPAuth = true;
   $mail->Username = "inventory@projecttest.ca";
-  $mail->Password = "Project2021";
+  $mail->Password = "Password2021";
   $mail->Port = 587;
 
   $mail->setFrom("inventory@projecttest.ca", "Inventory Management");
