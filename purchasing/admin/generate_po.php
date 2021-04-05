@@ -1,8 +1,8 @@
 <?php
 	session_start();
 	if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && $_SESSION['role'] == 'admin') {
-		include("..\..\connect.php");
-		include("..\..\mailer.php");
+		include("../../connect.php");
+		include("../../mailer.php");
 		require_once("../vendor/autoload.php");
 	} else {
 		header("Location: C:/wamp64/www/index.php");

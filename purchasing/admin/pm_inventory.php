@@ -2,7 +2,7 @@
   session_start();
   if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && $_SESSSION['role']='admin') {
 		include("pm_topbar.php");
-		include("..\..\connect.php");
+		include("../../connect.php");
   } else {
   	header("Location: C:/wamp64/www/index.php");
   	exit();
@@ -163,7 +163,7 @@
      	 	<th class="table1">Description</th>
       </tr>
 		<?php
-    $inv = $campus ."_inv";
+    $inv = strtolower($campus ."_inv");
 		//Static Query
 
 		if (isset($_POST['search'])) {
