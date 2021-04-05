@@ -147,48 +147,23 @@
       	<?php
 
 				//number of requests query SCAR
-				$sql = "SELECT COUNT(DISTINCT product_id) AS count FROM requests WHERE status = 'approved' AND campus = 'Scarborough';";
+				$sql = "SELECT COUNT(DISTINCT product_id) AS count FROM requests WHERE status = 'approved' AND campus = 'scarborough';";
 				$result = $conn->query($sql);
 				$row = $result->fetch_assoc();
 
-				//number of requests query TOR
-				$sql2 = "SELECT COUNT(DISTINCT product_id) AS count FROM requests WHERE status = 'approved' AND campus = 'Toronto';";
-				$result2 = $conn->query($sql2);
-				$row2 = $result2->fetch_assoc();
-
-				//number of requests query MISS
-				$sql3 = "SELECT COUNT(DISTINCT product_id) AS count FROM requests WHERE status = 'approved' AND campus = 'Mississauga';";
-				$result3 = $conn->query($sql3);
-				$row3 = $result3->fetch_assoc();
-
 				//number of requests query BUR
-				$sql4 = "SELECT COUNT(DISTINCT product_id) AS count FROM requests WHERE status = 'approved' AND campus = 'Burlington';";
+				$sql4 = "SELECT COUNT(DISTINCT product_id) AS count FROM requests WHERE status = 'approved' AND campus = 'burlington';";
 				$result4 = $conn->query($sql4);
 				$row4 = $result4->fetch_assoc();
 
 				//number of requests query Barrie
-				$sql5 = "SELECT COUNT(DISTINCT product_id) AS count FROM requests WHERE status = 'approved' AND campus = 'Barrie';";
+				$sql5 = "SELECT COUNT(DISTINCT product_id) AS count FROM requests WHERE status = 'approved' AND campus = 'barrie';";
 				$result5 = $conn->query($sql5);
 				$row5 = $result5->fetch_assoc();
-
-				//number of requests query PETER
-				$sql6 = "SELECT COUNT(DISTINCT product_id) AS count FROM requests WHERE status = 'approved' AND campus = 'Peterborough';";
-				$result6 = $conn->query($sql6);
-				$row6 = $result6->fetch_assoc();
 
 				echo "<tr>";
 				echo "<td>Scarborough</td>";
 				echo "<td>" . $row["count"]."</td>";
-				echo "</tr>";
-
-				echo "<tr>";
-				echo "<td>Toronto</td>";
-				echo "<td>" . $row2["count"]."</td>";
-				echo "</tr>";
-
-				echo "<tr>";
-				echo "<td>Mississauga</td>";
-				echo "<td>" . $row3["count"]."</td>";
 				echo "</tr>";
 
 				echo "<tr>";
@@ -199,11 +174,6 @@
 				echo "<tr>";
 				echo "<td>Barrie</td>";
 				echo "<td>" . $row5["count"]."</td>";
-				echo "</tr>";
-
-				echo "<tr>";
-				echo "<td>Peterborough</td>";
-				echo "<td>" . $row["count"]."</td>";
 				echo "</tr>";
 
 		?>

@@ -5,7 +5,7 @@
 		include("../../mailer.php");
 		require_once("../vendor/autoload.php");
 	} else {
-		header("Location: C:/wamp64/www/index.php");
+		header("Location: ../../index.php");
 		exit();
 	}
 
@@ -201,16 +201,13 @@
 	
 	$pdf = new \Mpdf\Mpdf();
 
-	$file_location = "../../po/PO_" .$po_id. ".pdf";
+	$file_location = "PO_" .$po_id. ".pdf";
 
 	$pdf->WriteHTML($html);
 	$pdf->Output($file_location, "F");
 
 	$query = "INSERT INTO purchase_orders VALUES ($po_id, '$file_location', 'approved', '$supplier', '$campus', '$fullname');";
 	mysqli_query($conn, $query);
-
-	// $query = "UPDATE requests SET status='shipped' WHERE status='approved' AND campus='$campus' AND supplier='$supplier';";
-	// mysqli_query($conn, $query);
 
 	header("Location: po_management.php?campus=$campus");
 ?>

@@ -43,7 +43,7 @@
     $supplier = $row2['supplier'];
     $price = $row2['price'];
 
-    $query = "INSERT INTO requests (r_id, username, campus, product_id, supplier, quantity, unit_price) VALUES ($rid, '$username', '$campus', '$pid', '$supplier', $qnty, $price);";
+    $query = "INSERT INTO requests (r_id, username, campus, product_id, supplier, quantity, unit_price, status) VALUES ($rid, '$username', '$campus', '$pid', '$supplier', $qnty, $price, 'approved');";
     mysqli_query($conn, $query);
   }
   else {
@@ -63,7 +63,7 @@
       $supplier = $row3['supplier'];
       $price = $row3['price'];
   
-      $query = "INSERT INTO requests (r_id, username, campus, product_id, supplier, quantity, unit_price) VALUES ($rid, '$username', '$campus', '$pid', '$supplier', $quantity, $price);";
+      $query = "INSERT INTO requests (r_id, username, campus, product_id, supplier, quantity, unit_price, status) VALUES ($rid, '$username', '$campus', '$pid', '$supplier', $quantity, $price, 'approved');";
       mysqli_query($conn, $query);
     }
   }
@@ -71,7 +71,7 @@
   $query = "DELETE FROM cart WHERE r_id=$rid2;";
   mysqli_query($conn, $query);
 
-  $query = "SELECT email, fullname FROM user WHERE campus='$campus' AND role='campus';";
+  $query = "SELECT email, fullname FROM user WHERE role='purchasing';";
   $result = mysqli_query($conn, $query);
   $row = mysqli_fetch_assoc($result);
 

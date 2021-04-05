@@ -12,7 +12,7 @@
 ?>
 <html>
 	<head>
-		<title><?php echo $campus; ?></title>
+		<title><?php echo ucwords($campus); ?></title>
 		<style>
 		body{
 			margin: 0 auto;
@@ -135,7 +135,7 @@
     CURRENT INVENTORY
 
     -->
-    <h2 class="outside">Current <?php echo $campus ?> Inventory List</h2>
+    <h2 class="outside">Current <?php echo ucwords($campus) ?> Inventory List</h2>
     <br>
     <br>
 

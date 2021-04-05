@@ -51,7 +51,7 @@
       try {
         $mail->send();
       } catch (Exception $e) {
-        echo "error";
+        echo " ";
       }
     }
     elseif (isset($_GET['deny'])) {
@@ -182,7 +182,7 @@
                           <td>" .$row['description']. "</td>
                           <td>
                             <a href='pm_item_requests.php?campus=$campus&id=$id&approve=true' style='float: left; width: 50%;'><button type='button'>Approve</button></a>
-                            <a href='pm_item_requests.php?campus=$campus&id=$id&deny=true' style='float: right;'><button type='button'>deny</button></a>
+                            <a href='pm_item_requests.php?campus=$campus&id=$id&deny=true' style='float: right;'><button type='button'>Deny</button></a>
                           </td>
                         </tr>";
             }
