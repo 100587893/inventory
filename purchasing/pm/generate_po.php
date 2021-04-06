@@ -164,19 +164,16 @@
 				<br>
 				<h5 class='total_label' style='float: right;'><b>Order Total:</b> $" .$order_total. "</h5>
 			</div>";
-
 	
 	$file_location = "PO_$po_id.pdf";
-	echo "<br>".$file_location;
 
-	/*$pdf = new \Mpdf\Mpdf();
-
+	$pdf = new \Mpdf\Mpdf();
 
 	$pdf->WriteHTML($html);
-	$pdf->Output($file_location, "F");*/
+	$pdf->Output($file_location, "F");
 
 	$query = "INSERT INTO purchase_orders VALUES ($po_id, '$file_location', 'approved', '$supplier', '$campus', '$fullname');";
 	mysqli_query($conn, $query);
 
-	//header("Location: po_management.php?campus=$campus");
+	header("Location: po_management.php?campus=$campus");
 ?>
