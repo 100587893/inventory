@@ -131,67 +131,33 @@
 	$query = "SELECT * FROM requests WHERE status='approved' AND campus='$campus' AND supplier='$supplier';";
 	$result = mysqli_query($conn, $query);
 
-	if (strpos($name, "Kit") !== false) {
-		$sql = "SELECT * FROM kit WHERE kit='$name';";
-		$result2 = $conn->query($sql);
-
-		while ($row = $result2->fetch_assoc()) {
-			$id = $row['product_id'];
-			$kit_qnty = $row['quantity'];
-
-			$sql = "SELECT * FROM product WHERE product_id='$id';";
-			$result3 = $conn->query($sql);
-			$row3 = $result3->fetch_assoc();
-
-			$description = $row3['description'];
-			$unit_price = $row3['price'];
-
-			$quantity = $qnty * $kit_qnty;
-			$item_total = $quantity * $unit_price;
-
-			$html .= "<tr>
-						<td>$id</td>
+	
+	while ($row = mysqli_fetch_assoc($result)) {
+		$rid = $row['r_id'];
+		$pid = $row['product_id'];
+		$quantity = $row['quantity'];
+		$unit_price = $row['unit_price'];
+		
+		$query = "SELECT * FROM product WHERE product_id='$pid';";
+		$result2 = mysqli_query($conn, $query);
+		$row2 = mysqli_fetch_assoc($result2);
+		
+		$serial = $row2['product_id'];
+		$description = $row2['description'];
+		$item_total = $quantity*$unit_price;
+		
+		$html .= "	<tr>
+						<td>$serial</td>
 						<td>$description</td>
 						<td>$quantity</td>
 						<td>$ " .$unit_price. "</td>
 						<td>$ " .$item_total. "</td>
 					</tr>";
-			
-			$order_total += $item_total;
-			$item_total = 0.0;
-		}
-
+		$order_total += $item_total;
+		$item_total = 0.0;
+		
 		$query = "UPDATE requests SET po_number=$id WHERE r_id=$rid and product_id='$pid';";
 		mysqli_query($conn, $query);
-	}
-	else {
-		while ($row = mysqli_fetch_assoc($result)) {
-			$rid = $row['r_id'];
-			$pid = $row['product_id'];
-			$quantity = $row['quantity'];
-			$unit_price = $row['unit_price'];
-			
-			$query = "SELECT * FROM product WHERE product_id='$pid';";
-			$result2 = mysqli_query($conn, $query);
-			$row2 = mysqli_fetch_assoc($result2);
-			
-			$serial = $row2['product_id'];
-			$description = $row2['description'];
-			$item_total = $quantity*$unit_price;
-			
-			$html .= "	<tr>
-							<td>$serial</td>
-							<td>$description</td>
-							<td>$quantity</td>
-							<td>$ " .$unit_price. "</td>
-							<td>$ " .$item_total. "</td>
-						</tr>";
-			$order_total += $item_total;
-			$item_total = 0.0;
-			
-			$query = "UPDATE requests SET po_number=$id WHERE r_id=$rid and product_id='$pid';";
-			mysqli_query($conn, $query);
-		}
 	}
 
 	$html .= "</table>
