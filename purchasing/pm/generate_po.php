@@ -82,7 +82,7 @@
 				<p class='subtext_label'><b>Supplier: </b> $supplier</p>
 
 				<p><b>Date Ordered:</b> " .date('m/d/Y'). "</p>
-				<p><b>P.O. #:</b> $id</p>
+				<p><b>P.O. #:</b> $po_id</p>
 				<p><b>Date Required:</b> $required_by</p>
 				<p><b>Requester's Name:</b> $fullname</p>
 				<br>
@@ -156,7 +156,7 @@
 		$order_total += $item_total;
 		$item_total = 0.0;
 		
-		$query = "UPDATE requests SET po_number=$id WHERE r_id=$rid and product_id='$pid';";
+		$query = "UPDATE requests SET po_number=$po_id WHERE r_id=$rid and product_id='$pid';";
 		mysqli_query($conn, $query);
 	}
 
