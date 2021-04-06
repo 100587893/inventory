@@ -32,7 +32,6 @@
 
 	<body>
 		<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-			<a class="navbar-brand pb-2" href="wm_home.php"><img src="../oxfordlogo.png" width="300"></a>
 
 			<div class="collapse navbar-collapse" id="navbarNavDropdown">
 				<ul class="navbar-nav p-2">
