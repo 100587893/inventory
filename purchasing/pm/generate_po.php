@@ -165,7 +165,7 @@
 				<h5 class='total_label' style='float: right;'><b>Order Total:</b> $" .$order_total. "</h5>
 			</div>";
 	
-	$file_location = "PO_$po_id.pdf";
+	$file_location = "../../po/PO_$po_id.pdf";
 
 	$pdf = new \Mpdf\Mpdf();
 
