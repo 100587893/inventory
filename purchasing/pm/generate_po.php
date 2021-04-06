@@ -167,7 +167,7 @@
 
 	
 	$file_location = "PO_$po_id.pdf";
-	echo "<br".$file_location;
+	echo "<br>".$file_location;
 
 	/*$pdf = new \Mpdf\Mpdf();
 
