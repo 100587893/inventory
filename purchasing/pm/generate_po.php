@@ -167,10 +167,10 @@
 	
 	$file_location = "../../po/PO_$po_id.pdf";
 
-	$pdf = new \Mpdf\Mpdf();
+	/*$pdf = new \Mpdf\Mpdf();
 
 	$pdf->WriteHTML($html);
-	$pdf->Output($file_location, "F");
+	$pdf->Output($file_location, "F");*/
 
 	$query = "INSERT INTO purchase_orders VALUES ($po_id, '$file_location', 'approved', '$supplier', '$campus', '$fullname');";
 	mysqli_query($conn, $query);
