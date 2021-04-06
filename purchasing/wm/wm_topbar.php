@@ -58,16 +58,7 @@
 								<a href="wm_active_requests.php?campus=Burlington">Burlington</a>
 							</li>
 							<li class="dropdown-item">
-								<a href="wm_active_requests.php?campus=Mississauga">Mississauga</a>
-							</li>
-							<li class="dropdown-item">
-								<a href="wm_active_requests.php?campus=Peterborough">Peterborough</a>
-							</li>
-							<li class="dropdown-item">
 								<a href="wm_active_requests.php?campus=Scarborough">Scarborough</a>
-							</li>
-							<li class="dropdown-item">
-								<a href="wm_active_requests.php?campus=Toronto">Toronto</a>
 							</li>
 						</ul>
 					</li>
