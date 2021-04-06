@@ -32,7 +32,6 @@
 
 	<body>
 		<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-			<a class="navbar-brand pb-2" href="pm_home.php"><img src="../oxfordlogo.png" width="300"></a>
 
 			<!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
