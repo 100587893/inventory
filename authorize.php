@@ -2,11 +2,11 @@
 
 	include "connect.php";
 
-	//Pull selected items from previous page
+	//Pull selected items from previous page.
 	$uname=$_POST['user'];
 	$pass=$_POST['pass'];
 
-	//SQL Query to verify authorized access
+	//SQL Query to verify authorized access.
 	$sql = "SELECT * FROM user WHERE username='$uname' AND password='$pass'";
 	$result = $conn->query($sql);
 	$row = mysqli_num_rows($result);
@@ -19,7 +19,7 @@
 	$role=$row2['role'];
 	$email=$row2['email'];
 
-	//Check if authorized and access level redirect
+	//Check if authorized and access level redirect.
 	if($row==1){
 
      session_start();
