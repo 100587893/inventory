@@ -12,7 +12,7 @@
 	$row = mysqli_num_rows($result);
 	$row2 = $result->fetch_assoc();
 
-	//Get user info
+	//Get user info.
 	$user_id=$row2["id"];
 	$user_fullname=$row2["fullname"];
 	$access=$row2['campus'];
